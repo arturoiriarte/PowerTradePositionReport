@@ -38,6 +38,10 @@ namespace PositionReport.Application.Tests
             mockPowerPositionRunnerWithRetry.Verify(s => s.RunOnceWithRetryAsync(cts.Token), Times.Once);
         }
 
+        // Notes: We can improve the test duration by using a smaller time interval in the scheduler settings.
+        // Consider change TimeIntervalInMinutes to TimeIntervalInSeconds or TimeIntervalInMilliseconds to reduce the wait time.
+        // This would require changes in the SchedulerSettings class and the PowerPositionSimpleSchedulerRunImmediately class.
+        // An Alternative workaround would be to change type from int to double in order to allow fractions of a minute.
         [Fact]
         public async Task RunAsync_ShouldRunMultipleTimes_WhenNotCancelled()
         {
