@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "PowerTradePositionReport.ConsoleApp": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SERVICE_MODE": "Normal",
+        "SchedulerSettings__MaxRetryAttempts": "5"
+      }
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
