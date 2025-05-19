@@ -13,7 +13,7 @@ namespace PositionReport.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            services.AddSingleton<IPowerPositionCsvFormatStrategy, PowerPositionCsvISO8601FormatStrategy>();
+            services.AddSingleton<IPowerPositionCsvFormatStrategy, PowerPositionCsvLocalTimeFormatStrategy>();
             services.AddTransient<IPowerTradeService, AxpoPowerTradeServiceAdapter>();
             services.AddTransient<IPowerPositionCsvGenerator, PowerPositionSimpleCsvGenerator>();
             return services;

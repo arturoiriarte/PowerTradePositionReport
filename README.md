@@ -21,7 +21,7 @@ A .NET 9 console application that aggregates day-ahead power positions per hour 
     "OutputPath": "./reports"
   },
   "TimezoneSettings": {
-    "TimeZoneId": "Europe/Berlin"
+    "TimeZoneId": "Europe/London"
   }
 }
 ```

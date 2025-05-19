@@ -18,10 +18,10 @@ namespace PositionReport.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddSingleton<IPowerPositionScheduler, PowerPositionSimpleSchedulerRunImmediately>();
-            services.AddSingleton<ITimeZoneProvider, BerlinTimeZoneProvider>();
+            services.AddSingleton<ITimeZoneProvider, LondonTimeZoneProvider>();
             services.AddSingleton<IAmbiguousTimeStrategy, FirstUtcAmbiguousTimeStrategy>();
             services.AddSingleton<IPowerPositionRunnerWithRetry, PowerPositionRunnerWithMaxRetry>();
-            services.AddSingleton<IPowerPositionFileNameStrategy, PowerPositionTimestampFileNameStrategy>();
+            services.AddSingleton<IPowerPositionFileNameStrategy, PowerPositionLocalDateTimeFileNameStrategy>();
             services.AddTransient<IPowerTradeAggregator, UtcPowerTradeAggregator>();
             services.AddTransient<IPowerPositionService, PowerPositionService>();
             return services;
