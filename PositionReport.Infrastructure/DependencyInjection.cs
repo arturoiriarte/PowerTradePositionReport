@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PositionReport.Application.Interfaces;
+using PositionReport.Infrastructure.CsvFormatStrategy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace PositionReport.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
+            services.AddSingleton<IPowerPositionCsvFormatStrategy, PowerPositionCsvISO8601FormatStrategy>();
             services.AddTransient<IPowerTradeService, AxpoPowerTradeServiceAdapter>();
             services.AddTransient<IPowerPositionCsvGenerator, PowerPositionSimpleCsvGenerator>();
             return services;

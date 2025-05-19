@@ -11,9 +11,13 @@ namespace PositionReport.Infrastructure
     public class PowerPositionSimpleCsvGenerator : IPowerPositionCsvGenerator
     {
         private readonly IPowerPositionFileNameStrategy _fileNameStrategy;
-        public PowerPositionSimpleCsvGenerator(IPowerPositionFileNameStrategy fileNameStrategy)
+        private readonly IPowerPositionCsvFormatStrategy _csvFormatStrategy;
+        public PowerPositionSimpleCsvGenerator(
+            IPowerPositionFileNameStrategy fileNameStrategy, 
+            IPowerPositionCsvFormatStrategy csvFormatStrategy)
         {
             _fileNameStrategy = fileNameStrategy;
+            _csvFormatStrategy = csvFormatStrategy;
         }
         public void GenerateCsvReportFile(IDictionary<DateTime, double> data, DateTime tradeDate, DateTime extractionUtcDate, string filePath)
         {
@@ -23,13 +27,11 @@ namespace PositionReport.Infrastructure
             Directory.CreateDirectory(filePath);
 
             using var writer = new StreamWriter(fullPath);
-            writer.WriteLine("Datetime;Volume");
-            foreach (var kvp in data.OrderBy(o => o.Key))
+            writer.WriteLine(_csvFormatStrategy.GetHeader());
+
+            foreach (var line in _csvFormatStrategy.FormatLines(data))
             {
-                // Format the date as ISO 8601
-                string formattedDate = kvp.Key.ToString("yyyy-MM-ddTHH:mm:ssZ");
-                string volume = kvp.Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
-                writer.WriteLine($"{formattedDate};{volume}");
+                writer.WriteLine(line);
             }
         }
     }
