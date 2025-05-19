@@ -29,7 +29,7 @@ A .NET 9 console application that aggregates day-ahead power positions per hour 
 ### Override with CLI:
 
 ```bash
-dotnet run --SchedulerSettings:TimeIntervalInMinutes=1
+dotnet run --SchedulerSettings:TimeIntervalInMinutes=1 --ReportExportSettings:OutputPath='./reports'
 ```
 
 ### Override with Environment variables
