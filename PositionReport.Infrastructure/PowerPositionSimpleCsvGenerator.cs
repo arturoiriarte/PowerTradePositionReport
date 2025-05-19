@@ -1,4 +1,5 @@
-﻿using PositionReport.Application.Interfaces;
+﻿using PositionReport.Application.FileNameStrategy;
+using PositionReport.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,15 @@ namespace PositionReport.Infrastructure
 {
     public class PowerPositionSimpleCsvGenerator : IPowerPositionCsvGenerator
     {
+        private readonly IPowerPositionFileNameStrategy _fileNameStrategy;
+        public PowerPositionSimpleCsvGenerator(IPowerPositionFileNameStrategy fileNameStrategy)
+        {
+            _fileNameStrategy = fileNameStrategy;
+        }
         public void GenerateCsvReportFile(IDictionary<DateTime, double> data, DateTime tradeDate, DateTime extractionUtcDate, string filePath)
         {
-            var filename = $"PowerPosition_{tradeDate:yyyyMMdd}_{extractionUtcDate:yyyyMMddHHmm}.csv";
-            var fullPath = Path.Combine(filePath, filename);
+            var fileName = _fileNameStrategy.GetFileName(tradeDate, extractionUtcDate);
+            var fullPath = Path.Combine(filePath, fileName);
 
             Directory.CreateDirectory(filePath);
 

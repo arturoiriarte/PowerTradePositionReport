@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PositionReport.Application.AmbiguousTimeStrategy;
+using PositionReport.Application.FileNameStrategy;
 using PositionReport.Application.PowerPositionRunner;
 using PositionReport.Application.PowerPositionScheduler;
 using PositionReport.Application.PowerTradeAggregator;
@@ -20,6 +21,7 @@ namespace PositionReport.Application
             services.AddSingleton<ITimeZoneProvider, BerlinTimeZoneProvider>();
             services.AddSingleton<IAmbiguousTimeStrategy, FirstUtcAmbiguousTimeStrategy>();
             services.AddSingleton<IPowerPositionRunnerWithRetry, PowerPositionRunnerWithMaxRetry>();
+            services.AddSingleton<IPowerPositionFileNameStrategy, PowerPositionTimestampFileNameStrategy>();
             services.AddTransient<IPowerTradeAggregator, UtcPowerTradeAggregator>();
             services.AddTransient<IPowerPositionService, PowerPositionService>();
             return services;

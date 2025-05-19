@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using Moq;
+using PositionReport.Application.FileNameStrategy;
 using PositionReport.Application.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,12 @@ namespace PositionReport.Infrastructure.Tests
         public void ExportToCsv_ShouldCreateCorrectFile_WithCorrectContent()
         {
             // Arrange
-            IPowerPositionCsvGenerator csvGenerator = new PowerPositionSimpleCsvGenerator();
+            var mockFileNameStrategy = new Mock<IPowerPositionFileNameStrategy>();
+            mockFileNameStrategy
+                .Setup(s => s.GetFileName(It.IsAny<DateTime>(), It.IsAny<DateTime>()))
+                .Returns("PowerPosition_20230702_202307011915.csv");
+
+            IPowerPositionCsvGenerator csvGenerator = new PowerPositionSimpleCsvGenerator(mockFileNameStrategy.Object);
             IDictionary<DateTime, double> dataToExport = new Dictionary<DateTime, double>
             {
                 { new DateTime(2023, 7, 1, 22, 0, 0, DateTimeKind.Utc), 150 },
@@ -97,7 +104,12 @@ namespace PositionReport.Infrastructure.Tests
         public void ExportToCsv_ShouldCreateCorrectFile_WithCorrectContent_EmptyData()
         {
             // Arrange
-            IPowerPositionCsvGenerator csvGenerator = new PowerPositionSimpleCsvGenerator();
+            var mockFileNameStrategy = new Mock<IPowerPositionFileNameStrategy>();
+            mockFileNameStrategy
+                .Setup(s => s.GetFileName(It.IsAny<DateTime>(), It.IsAny<DateTime>()))
+                .Returns("PowerPosition_20230702_202307011915.csv");
+
+            IPowerPositionCsvGenerator csvGenerator = new PowerPositionSimpleCsvGenerator(mockFileNameStrategy.Object);
             IDictionary<DateTime, double> dataToExport = new Dictionary<DateTime, double>();
             var tradeDate = new DateTime(2023, 7, 2);
             var extractionUtcTimestamp = new DateTime(2023, 7, 1, 19, 15, 0);
@@ -127,7 +139,12 @@ namespace PositionReport.Infrastructure.Tests
         public void ExportToCsv_ShouldCreateFileWithExpectedFileName(string tradeDateStr, string extractionUtcTimestampStr, string fileName)
         {
             // Arrange
-            IPowerPositionCsvGenerator csvGenerator = new PowerPositionSimpleCsvGenerator();
+            var mockFileNameStrategy = new Mock<IPowerPositionFileNameStrategy>();
+            mockFileNameStrategy
+                .Setup(s => s.GetFileName(It.IsAny<DateTime>(), It.IsAny<DateTime>()))
+                .Returns($"PowerPosition_{tradeDateStr}_{extractionUtcTimestampStr}.csv");
+
+            IPowerPositionCsvGenerator csvGenerator = new PowerPositionSimpleCsvGenerator(mockFileNameStrategy.Object);
             IDictionary<DateTime, double> dataToExport = new Dictionary<DateTime, double>();
             var filePath = Path.GetTempPath();
             var expectedFileName = Path.Combine(filePath, fileName);

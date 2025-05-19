@@ -59,7 +59,7 @@ namespace PositionReport.Application.Tests
                     It.IsAny<EventId>(),
                     It.Is<It.IsAnyType>((v, _) => v.ToString().Contains("Error occurred while processing the scheduler. Attempt 1")),
                     It.IsAny<Exception>(),
-                    It.IsAny<Func<It.IsAnyType, Exception, string>>()
+                    It.IsAny<Func<It.IsAnyType, Exception?, string>>()
                 )
             , Times.Once);
 
@@ -69,7 +69,7 @@ namespace PositionReport.Application.Tests
                     It.IsAny<EventId>(),
                     It.Is<It.IsAnyType>((v, _) => v.ToString().Contains("Error occurred while processing the scheduler. Attempt 2")),
                     It.IsAny<Exception>(),
-                    It.IsAny<Func<It.IsAnyType, Exception, string>>()
+                    It.IsAny<Func<It.IsAnyType, Exception?, string>>()
                 )
             , Times.Once);
 
@@ -88,7 +88,6 @@ namespace PositionReport.Application.Tests
                 .Setup(p => p.GetTimeZone())
                 .Returns(TimeZoneInfo.FindSystemTimeZoneById("Europe/Berlin"));
 
-            var callCount = 0;
             mockPowerPositionService
                 .Setup(s => s.GeneratePowerPositionReportAsync(It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<string>()))
                 .Returns(() =>
@@ -119,7 +118,7 @@ namespace PositionReport.Application.Tests
                     It.IsAny<EventId>(),
                     It.Is<It.IsAnyType>((v, _) => v.ToString().Contains("Runner operation was canceled.")),
                     It.IsAny<Exception>(),
-                    It.IsAny<Func<It.IsAnyType, Exception, string>>()
+                    It.IsAny<Func<It.IsAnyType, Exception?, string>>()
                 )
             , Times.Once);
         }

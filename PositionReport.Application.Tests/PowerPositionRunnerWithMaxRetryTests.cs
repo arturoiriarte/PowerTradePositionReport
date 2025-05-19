@@ -96,7 +96,7 @@ namespace PositionReport.Application.Tests
                     It.IsAny<EventId>(),
                     It.Is<It.IsAnyType>((v, _) => v.ToString().Contains("Max retry attempts reached.")),
                     It.IsAny<Exception>(),
-                    It.IsAny<Func<It.IsAnyType, Exception, string>>()
+                    It.IsAny<Func<It.IsAnyType, Exception?, string>>()
                 )
             , Times.Once);
         }
@@ -147,7 +147,7 @@ namespace PositionReport.Application.Tests
                     It.IsAny<EventId>(),
                     It.Is<It.IsAnyType>((v, _) => v.ToString().Contains("Runner operation was canceled.")),
                     It.IsAny<Exception>(),
-                    It.IsAny<Func<It.IsAnyType, Exception, string>>()
+                    It.IsAny<Func<It.IsAnyType, Exception?, string>>()
                 )
             , Times.Once);
         }

@@ -45,7 +45,11 @@ namespace PositionReport.Application.PowerTradeAggregator
                     // Skip invalid times due to DST start
                     if (_timeZoneProvider.GetTimeZone().IsInvalidTime(localDateTime))
                     {
-                        _logger.LogWarning($"Skipping invalid time {localDateTime} for trade date {trade.Date} and period {period.Period} with time zone {_timeZoneProvider.GetTimeZone().DisplayName}.");
+                        _logger.LogWarning("Skipping invalid time {LocalDateTime} for trade date {TradeDate} and period {Period} with time zone {TimeZoneDisplayName}.",
+                            localDateTime,
+                            trade.Date,
+                            period.Period,
+                            _timeZoneProvider.GetTimeZone().DisplayName);
                         continue;
                     }
 
@@ -55,7 +59,7 @@ namespace PositionReport.Application.PowerTradeAggregator
                     {
                         foreach (var utcTime in _ambiguousTimeStrategy.ResolveAmbiguousUtcTimes(localDateTime, _timeZoneProvider.GetTimeZone()))
                         {
-                            _logger.LogWarning($"Ambiguous time {localDateTime} mapping to {utcTime}");
+                            _logger.LogWarning("Ambiguous time {LocalDateTime} mapping to {UtcTime}", localDateTime, utcTime);
                             if (!output.ContainsKey(utcTime))
                                 output[utcTime] = 0;
 

@@ -19,7 +19,7 @@ namespace PositionReport.Application.TimeZoneProvider
 
         public TimeZoneInfo GetTimeZone()
         {
-            return TimeZoneInfo.FindSystemTimeZoneById(_timeZoneSettings.TimeZoneId); ;
+            return TimeZoneInfo.FindSystemTimeZoneById(_timeZoneSettings.TimeZoneId);
         }
     }
 }
