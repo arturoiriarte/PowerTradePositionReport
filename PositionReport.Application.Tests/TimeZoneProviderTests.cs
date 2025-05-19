@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using Moq;
 using PositionReport.Application.Configuration;
 using PositionReport.Application.TimeZoneProvider;
 using System;

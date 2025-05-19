@@ -5,7 +5,6 @@ using Moq;
 using PositionReport.Application.Configuration;
 using PositionReport.Application.PowerPositionRunner;
 using PositionReport.Application.PowerPositionScheduler;
-using PositionReport.Application.TimeZoneProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;

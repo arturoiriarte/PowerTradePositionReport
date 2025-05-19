@@ -1,7 +1,5 @@
 ﻿using FluentAssertions;
-using Moq;
 using PositionReport.Application.AmbiguousTimeStrategy;
-using PositionReport.Application.TimeZoneProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;

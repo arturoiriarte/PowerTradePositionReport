@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PositionReport.Application.Configuration;
-using PositionReport.Application.PowerPositionScheduler;
 using PositionReport.Application.TimeZoneProvider;
 using System;
 using System.Collections.Generic;

@@ -3,13 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PositionReport.Application;
-using PositionReport.Application.AmbiguousTimeStrategy;
 using PositionReport.Application.Configuration;
-using PositionReport.Application.Interfaces;
-using PositionReport.Application.PowerPositionRunner;
-using PositionReport.Application.PowerPositionScheduler;
-using PositionReport.Application.PowerTradeAggregator;
-using PositionReport.Application.TimeZoneProvider;
 using PositionReport.Infrastructure;
 
 namespace PositionReport.ConsoleApp
