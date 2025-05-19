@@ -31,7 +31,7 @@ namespace PositionReport.ConsoleApp
                     // Configuration
                     services
                         .Configure<SchedulerSettings>(hostContext.Configuration.GetSection("SchedulerSettings"))
-                        .Configure<ReportExportSettings>(hostContext.Configuration.GetSection("ReportSettings"))
+                        .Configure<ReportExportSettings>(hostContext.Configuration.GetSection("ReportExportSettings"))
                         .Configure<TimeZoneSettings>(hostContext.Configuration.GetSection("TimezoneSettings"));
 
                     // DI container
